@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sim</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+</head>
+    <body>
+        <script src="js/onLoad.js"></script>
+        <script src="js/misc_funcs.js"></script>
+        <script src="js/settings.js"></script>
+        <script src="js/assets/three.js"></script>
+        <script src="js/presetPlanets.js"></script>
+        <script src="js/camera.js" type="module"></script>
+        <script src="js/labels.js" type="module"></script>
+        <script src="js/gravityObjects.js" type="module"></script>
+        <script src="js/main.js" type="module"></script>
+        <script src="js/objectRelationshipData.js" type="module"></script>
+        <script src="js/planeDisplacement.js" type="module"></script>
+        <script src="js/settingChange.js" type="module"></script>
+        <script src="js/movingObjectsFunctions.js" type="module"></script>
+    </body>
+    <div id="menu-parent">
+        <div id="planet-creator-parent" class="panel">
+            <text style="display:block;">New Object</text>
+            <div>
+                <text>Presets</text>
+                <select id="preset-list" style="display: block; width: 70%; margin: 0 15%;" onchange="window.presetChange(this.value)">
+                    <option></option>
+                </select>
+            </div>
+            <div>
+                <text>Object Name</text>
+                <input id="object-name" style="width: 90%;" type="text">
+            </div>
+            <div>
+                <text style="display: block;">Mass (kg)</text>
+                <input id="mass-multiple" type="text" style="display: inline; width:30%;">
+                <span style="color: white;">x10^</span>
+                <input id="mass-power" type="text" style="display: inline; width:30%;">
+            </div>
+            <div>
+                <text style="display: block;">Radius (m)</text>
+                <input id="radius-multiple" type="text" style="display: inline; width:30%;">
+                <span style="color: white;">x10^</span>
+                <input id="radius-power" type="text" style="display: inline; width:30%;">
+            </div>
+            <div>
+                <text style="display: block;">Colour</text>
+                <input id="color" type="color" style="display: inline; width:90%; padding: 0;">
+            </div>
+            <div>
+                <text style="display: block;">Initial Velocity (m/s)</text>
+                <span>X: </span>
+                <input id="velocity-x" type="number" style="display: inline; width: 15%;">
+                <span>Y: </span>
+                <input id="velocity-y" type="number" style="display: inline; width: 15%;">
+                <span>Z (up): </span>
+                <input id="velocity-z" type="number" style="display: inline; width: 15%;">
+            </div>
+            <div>
+                <button style="margin-top: 10px;" onclick="window.addObject(this)"><span>Add Object</span></button>
+            </div>
+        </div>
+        <div class="panel" id="start-button-parent">
+            <div id="start-button" onclick="window.startSimulation()">
+                <text style="color: grey; font-size: 3vh;">Start</text>
+            </div>
+        </div>
+        <div id="simulation-settings-parent" class="panel" style="display: none;">
+            <div class="simulation-setting-box" style="margin-bottom: 20px;">
+                <text>Show Field Strength</text>
+                <div>
+                    <input style="width:100%; float: left;" type="checkbox" oninput="window.fieldStrengthChange(this.checked)" checked>
+                </div>
+            </div>
+            <div class="simulation-setting-box" style="margin-bottom: 20px;">
+                <text>Show Labels</text>
+                <div>
+                    <input style="width:100%; float: left;" type="checkbox" oninput="window.showLabelChange(this.checked)" checked>
+                </div>
+            </div>
+            <div class="simulation-setting-box" style="margin-bottom: 20px;">
+                <text>Show Vectors</text>
+                <div>
+                    <input style="width:100%; float: left;" type="checkbox" oninput="window.showVectorsChange(this.checked)" checked>
+                </div>
+            </div>
+            <div class="simulation-setting-box">
+                <text>Simulation Speed</text>
+                <div>
+                    <input style="width:100%; float: left;" type="range" min="-4" max="30" value="0" oninput="speedValue.innerText = window.simulationSpeedChange(this.value)">
+                    <p id="speedValue" style="display: inline;">1</p>
+                </div>
+            </div>
+            <div class="simulation-setting-box">
+                <text>Gravity Multiplier</text>
+                <div>
+                    <input style="width:100%; float: left;" type="range" min="-10" max="39" value="10" oninput="gravityValue.innerText = window.gravityChange(this.value)">
+                    <p id="gravityValue" style="display: inline;">1</p>
+                </div>
+            </div>
+        </div>
+        <div class="panel" id="refresh-button-parent" style="display: none;">
+            <div id="refresh-button" onclick="window.location.reload();" style="background-color: rgb(240, 30, 30);">
+                <text style="color:  rgb(200, 200, 200); font-size: 3vh;">Restart</text>
+            </div>
+        </div>
+        <div class="panel">
+            <div>
+                <text>Zoom</text>
+                <div>
+                    <input style="width:100%; float: left;" type="range" min="0" max="20" value="10" oninput="zoomValue.innerHTML = window.zoomChange(this.value)">
+                    <p style="display: inline;">1 grid space: </p><p id="zoomValue" style="display: inline;">initial<sup>7</sup>m</p>
+                </div>
+            </div>
+        </div>
+        <div class="panel" id="info-panel">
+            <text>Hold and drag on label to move.</text>
+            <text>&nbsp</text>
+            <text>Click on 2 labels to view information.</text>
+            <text>&nbsp</text>
+
+            <text style="color: grey">Plane displacement is proportional to g.</text>
+            <text style="color: grey">Green Vector: force</text>
+            <text style="color: grey">Blue Vector: velocity</text>
+            <text style="color: grey">Vectors are relative to other forces/velocity</text>
+        </div>
+    </div>
+    <div id="label-parent">
+    </div>
+    <div id="stats-parent">
+        <div>
+            <text id="time-passed-stat"></text>
+        </div>
+    </div>
+</html>

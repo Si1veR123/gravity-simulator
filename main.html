@@ -23,7 +23,7 @@
     </body>
     <div id="menu-parent">
         <div id="planet-creator-parent" class="panel">
-            <text style="display:block;">New Object</text>
+            <text style="display:block;"><b>New Object</b></text>
             <div>
                 <text>Presets</text>
                 <select id="preset-list" style="display: block; width: 70%; margin: 0 15%;" onchange="window.presetChange(this.value)">
@@ -63,11 +63,6 @@
                 <button style="margin-top: 10px;" onclick="window.addObject(this)"><span>Add Object</span></button>
             </div>
         </div>
-        <div class="panel" id="start-button-parent">
-            <div id="start-button" onclick="window.startSimulation()">
-                <text style="color: grey; font-size: 3vh;">Start</text>
-            </div>
-        </div>
         <div id="simulation-settings-parent" class="panel" style="display: none;">
             <div class="simulation-setting-box" style="margin-bottom: 20px;">
                 <text>Show Field Strength</text>
@@ -102,11 +97,6 @@
                 </div>
             </div>
         </div>
-        <div class="panel" id="refresh-button-parent" style="display: none;">
-            <div id="refresh-button" onclick="window.location.reload();" style="background-color: rgb(240, 30, 30);">
-                <text style="color:  rgb(200, 200, 200); font-size: 3vh;">Restart</text>
-            </div>
-        </div>
         <div class="panel">
             <div>
                 <text>Zoom</text>
@@ -127,10 +117,21 @@
             <text style="color: grey">Blue Vector: velocity</text>
             <text style="color: grey">Vectors are relative to other forces/velocity</text>
         </div>
+        <div class="panel" id="start-button-parent">
+            <div id="start-button" onclick="window.startSimulation()">
+                <text style="color: grey; font-size: 3vh;">Start</text>
+            </div>
+        </div>
+        <div class="panel" id="refresh-button-parent" style="display: none;">
+            <div id="refresh-button" onclick="window.location.reload();" style="background-color: rgb(240, 30, 30);">
+                <text style="color:  rgb(200, 200, 200); font-size: 3vh;">Restart</text>
+            </div>
+        </div>
         <div class="panel" id="load-panel">
             <button onclick="window.saveState()" id="save-button"><text>Save State</text></button>
             <button onclick="window.loadState()" id="load-button"><text>Load State</text></button>
         </div>
+        <a style="color: grey; padding-bottom: 20px; font-size: 16px" href="https://github.com/Si1veR123/gravity-simulator/tree/main" target="_blank">Source - GitHub</a>
     </div>
     <div id="label-parent">
     </div>

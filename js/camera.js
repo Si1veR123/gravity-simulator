@@ -4,7 +4,8 @@ import { OrbitControls } from 'https://cdn.skypack.dev/three@0.132.2/examples/js
 class PivotPointCamera {
     constructor(renderer) {
         this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 3000 );
-        this.camera.position.set(0, 0, 15);
+        this.camera.position.set(150, 600, 0);
+        this.camera.lookAt(0, 0, 0);
 
         this.controls = new OrbitControls( this.camera, renderer.domElement );
         this.controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled

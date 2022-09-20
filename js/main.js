@@ -1,5 +1,5 @@
 // UNITS:
-// length, Mm
+// length, varies by scale factor
 // mass, kg
 
 import {PivotPointCamera} from "./camera.js";

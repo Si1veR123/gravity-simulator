@@ -52,11 +52,11 @@
             </div>
             <div>
                 <text style="display: block;">Initial Velocity (m/s)</text>
-                <span>X: </span>
+                <span style="color: rgb(255, 100, 100);">X: </span>
                 <input id="velocity-x" type="number" style="display: inline; width: 15%;">
-                <span>Y: </span>
+                <span style="color: rgb(100, 255, 100);">Y: </span>
                 <input id="velocity-y" type="number" style="display: inline; width: 15%;">
-                <span>Z (up): </span>
+                <span style="color: rgb(100, 100, 255);">Z (up): </span>
                 <input id="velocity-z" type="number" style="display: inline; width: 15%;">
             </div>
             <div>
@@ -109,13 +109,17 @@
         <div class="panel" id="info-panel">
             <text>Hold and drag on label to move.</text>
             <text>&nbsp</text>
-            <text>Click on 2 labels to view information.</text>
+            <text>Click on 2 labels to view information about 2 objects' relationship.</text>
             <text>&nbsp</text>
 
             <text style="color: grey">Plane displacement is proportional to g.</text>
             <text style="color: grey">Green Vector: force</text>
             <text style="color: grey">Blue Vector: velocity</text>
-            <text style="color: grey">Vectors are relative to other forces/velocity</text>
+            <text style="color: grey">Vectors are relative to other forces/velocity.</text>
+        </div>
+        <div class="panel" id="load-panel">
+            <button onclick="window.saveState()" id="save-button"><text>Save State</text></button>
+            <button onclick="window.loadState()" id="load-button"><text>Load State</text></button>
         </div>
         <div class="panel" id="start-button-parent">
             <div id="start-button" onclick="window.startSimulation()">
@@ -126,10 +130,6 @@
             <div id="refresh-button" onclick="window.location.reload();" style="background-color: rgb(240, 30, 30);">
                 <text style="color:  rgb(200, 200, 200); font-size: 3vh;">Restart</text>
             </div>
-        </div>
-        <div class="panel" id="load-panel">
-            <button onclick="window.saveState()" id="save-button"><text>Save State</text></button>
-            <button onclick="window.loadState()" id="load-button"><text>Load State</text></button>
         </div>
         <a style="color: grey; padding-bottom: 20px; font-size: 16px" href="https://github.com/Si1veR123/gravity-simulator/tree/main" target="_blank">Source - GitHub</a>
     </div>

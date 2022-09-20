@@ -64,7 +64,7 @@ export function addLineRelationshipListener(label) {
     label.addEventListener("click", objectClicked);
 }
 
-function objectClicked(event) {
+export function objectClicked(event) {
     //if (!settings.startedSimulation) {return}
 
     let data = labelAndObjectFromEvent(event);
@@ -95,6 +95,24 @@ function objectClicked(event) {
     }
 }
 
+var verticalVector = new THREE.Vector3(0, 1, 0);
+function forceOrbit() {
+    let orbitCenter = currentlySelected[0].mass>currentlySelected[1].mass ? currentlySelected[0] : currentlySelected[1];
+    let orbiter = currentlySelected[0].mass>currentlySelected[1].mass ? currentlySelected[1] : currentlySelected[0];
+
+    let orbitVelocityMagnitude = Math.sqrt(
+        gravitationalConstant*(orbitCenter.mass/orbiter.distanceToSpaceObject(orbitCenter))
+        )
+
+    let orbitVelocity = orbitCenter.position().clone();
+    orbitVelocity.sub(orbiter.position().clone());
+    orbitVelocity.applyAxisAngle(verticalVector, Math.PI/2);
+    orbitVelocity.setLength(orbitVelocityMagnitude);
+
+    orbitVelocity.add(orbitCenter.velocity.clone());
+
+    orbiter.velocity = orbitVelocity;
+}
 
 function createNewLine() {
     if (currentlySelected[0] == null || currentlySelected[1] == null) {return}
@@ -131,6 +149,11 @@ function createNewLine() {
     forceText.classList.add("force-text");
     forceText.innerHTML = forceHtmlText();
 
+    let orbitButton = document.createElement("button");
+    orbitButton.classList.add("orbit-button");
+    orbitButton.innerHTML = "<text>Orbit</text>";
+    orbitButton.addEventListener("click", forceOrbit);
+
     // main parent
     let label = document.createElement("div");
     label.classList.add("object-label");
@@ -144,6 +167,7 @@ function createNewLine() {
     label.appendChild(nameText);
     label.appendChild(radiusText);
     label.appendChild(forceText);
+    label.appendChild(orbitButton)
 }
 
 export function updateLine() {

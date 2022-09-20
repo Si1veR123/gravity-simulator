@@ -15,7 +15,7 @@ text, a, p, span {
 }
 
 #time-passed-stat {
-    font-size: 26px;
+    font-size: 23px;
 }
 
 .panel {
@@ -99,6 +99,15 @@ text, a, p, span {
 #info-panel text {
     display: block;
     font-size: 16px;
+}
+
+.orbit-button {
+    padding: 3px 8px;
+    margin: 5px;
+    background-color: rgb(50, 50, 50);
+    border-radius: 5px;
+    color: grey;
+    cursor: pointer;
 }
 
 input[type=range]::-webkit-slider-runnable-track {

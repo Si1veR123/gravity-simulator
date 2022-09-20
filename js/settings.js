@@ -4,7 +4,7 @@ var settings = {
     simSpeed: 1, // changed by panel
     collisionElasticity: 0.1,
     lessPerformantAnimate: 5,
-    width: window.innerWidth*0.85,
+    width: window.innerWidth*0.83,
     height: window.innerHeight,
     showPlaneDisplacement: true,
     planeDisplacementScaling: 1/gravitationalConstant,

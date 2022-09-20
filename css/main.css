@@ -19,7 +19,7 @@ text, a, p, span {
 }
 
 .panel {
-    margin: 5%;
+    margin: 3%;
     background-color: rgb(50, 50, 50);
     border-radius: 8px;
     padding: 10px;
@@ -59,6 +59,10 @@ text, a, p, span {
     border-radius: 5px;
     opacity: 0.8;
     cursor: pointer;
+
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
 }
 
 .label-circle {

@@ -127,3 +127,61 @@ function zoomChange(value) {
     return Math.round(sfStandardForm[0]*100)/100 + "x10<sup>" + sfStandardForm[1] + "</sup>m";
 }
 window.zoomChange = zoomChange;
+
+
+function saveState() {
+    let data = [];
+
+    for (let obj of spaceObjects) {
+        data.push(obj.getSaveData());
+    }
+
+    let a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], {
+      type: "application/json"
+    }));
+    a.setAttribute("download", "gravitySimulationData.json");
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}
+window.saveState = saveState;
+
+
+function loadState() {
+    let input = document.createElement("input");
+    input.type = "file";
+    document.body.appendChild(input);
+    input.click();
+
+    input.addEventListener("change", function(event) {
+        let file = input.files[0];
+        if (file==null) {console.log("file is null"); return}
+
+        file.text().then(value => {
+            let loadedMap = JSON.parse(value);
+            if (loadedMap==null) {return}
+
+            for (let existingObj of spaceObjects) {
+                let label = document.getElementById("label-"+existingObj.name);
+                if (label != null) {
+                    label.remove()
+                }
+                scene.remove(existingObj.mesh);
+            }
+
+            spaceObjects.length = 0;
+
+            for (let objData of loadedMap) {
+                let newSpaceObject = new Planet(scene, objData.name, objData.radius, objData.mass, objData.color, false);
+                newSpaceObject.velocity = new THREE.Vector3(objData.velocityX, objData.velocityY, objData.velocityZ);
+                newSpaceObject.positionData = new THREE.Vector3(objData.positionX, objData.positionY, objData.positionZ);
+
+                spaceObjects.push(newSpaceObject);
+            };
+        });
+
+        document.body.removeChild(input);
+    })
+}
+window.loadState = loadState;

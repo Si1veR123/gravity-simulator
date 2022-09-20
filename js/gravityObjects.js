@@ -30,6 +30,20 @@ export class SpaceObject {
         }
     };
 
+    getSaveData() {
+        return {
+            name: this.name,
+            radius: this.collisionRadius*settings.scaleFactor,
+            mass: this.mass,
+            velocityX: this.velocity.x,
+            velocityY: this.velocity.y,
+            velocityZ: this.velocity.z,
+            positionX: this.position().x,
+            positionY: this.position().y,
+            positionZ: this.position().z
+        }
+    };
+
     resultantForce() {
         let resultant = new THREE.Vector3();
         for (let force of this.forces) {
@@ -237,8 +251,6 @@ export class SpaceObject {
 export class SphericalSpaceObject extends SpaceObject {
     constructor(parent, name, radius, mass, color, useTexture, materialSettings) {
         let geometry = new THREE.SphereGeometry(radius/settings.scaleFactor, 32, 16);
-        console.log(radius/settings.scaleFactor);
-        console.log(settings.scaleFactor);
         super(parent, name, radius, mass, color, useTexture, geometry, materialSettings);
     };
     newScaleFactor(sf) {

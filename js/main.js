@@ -158,11 +158,13 @@ function startSimulation() {
     let newPanel = document.getElementById("simulation-settings-parent");
     let button = document.getElementById("start-button-parent");
     let reButton = document.getElementById("refresh-button-parent");
+    let loadButton = document.getElementById("load-button");
 
     button.style.display = "none";
     oldPanel.style.display = "none";
     newPanel.style.display = "block";
     reButton.style.display = "block";
+    loadButton.style.display = "none";
 
     settings.startedSimulation = true;
 

@@ -177,13 +177,13 @@ export class SpaceObject {
 
         let velChange = acceleration.multiplyScalar(dt*simSpeed);
         this.velocity.add(velChange);
+        console.log(this.velocity.length()> settings.maxVelocity)
+        if (this.velocity.length() > settings.maxVelocity) {
+            this.velocity.setLength(settings.maxVelocity);
+        }
 
         // create new identical vector to velocity and scale by dt
         let changeVector = this.velocity.clone();
-
-        if (changeVector.length() > settings.maxVelocity) {
-            changeVector.setLength = settings.maxVelocity;
-        }
 
         changeVector.multiplyScalar(dt*simSpeed*(1/settings.scaleFactor)); // dt and convert to sf
         this.positionData.add(changeVector);

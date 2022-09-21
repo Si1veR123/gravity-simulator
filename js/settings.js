@@ -17,4 +17,5 @@ var settings = {
     vectorMinSize: 5,
     startedSimulation: false,
     pausedSimulation: false,
+    maxVelocity: stdfrm(3, 8);
 }

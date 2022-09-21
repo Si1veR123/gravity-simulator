@@ -180,6 +180,11 @@ export class SpaceObject {
 
         // create new identical vector to velocity and scale by dt
         let changeVector = this.velocity.clone();
+
+        if (changeVector.length() > settings.maxVelocity) {
+            changeVector.setLength = settings.maxVelocity;
+        }
+
         changeVector.multiplyScalar(dt*simSpeed*(1/settings.scaleFactor)); // dt and convert to sf
         this.positionData.add(changeVector);
         this.syncMeshPosition();
